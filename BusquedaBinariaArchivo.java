@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -42,4 +45,31 @@ public class BusquedaBinariaArchivo {
             System.out.println("No se pudo leer el archivo.");
         }
     }
+    // uso del bufer para leer los archivos
+    public static int[] leerArchivo(String nombreArchivo) { 
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+            String linea;
+            int count = 0;
+
+            // contara cuántos números hay
+            while ((linea = br.readLine()) != null) {
+                count++;
+            }
+            int[] numeros = new int[count];
+            br.close();
+
+            // lee nuevamente para almacenar
+            BufferedReader br2 = new BufferedReader(new FileReader(nombreArchivo));
+            int i = 0;
+            while ((linea = br2.readLine()) != null) {
+                numeros[i] = Integer.parseInt(linea.trim());
+                i++;
+            }
+            br2.close();
+
+            return numeros;
+        } catch (IOException | NumberFormatException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+            return null;
+        }
 }
