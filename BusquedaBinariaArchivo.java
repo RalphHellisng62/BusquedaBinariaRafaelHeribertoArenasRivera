@@ -20,13 +20,26 @@ public class BusquedaBinariaArchivo {
             System.out.println("\n numeros ordenados:");
             imprimirArray(numeros);
 
-             // Guardarlos en archivo nuevo
+             // aqui se guardan en un archivo nuevo
             escribirArchivo(numeros, archivoSalida);
-            System.out.println("\n📁 Archivo generado exitosamente: " + archivoSalida);
+            System.out.println("\n archivo generado exitosamente: " + archivoSalida);
 
-            // Búsqueda binaria
+            // aqui realiza la búsqueda binaria
             Scanner sc = new Scanner(System.in);
-            System.out.print("\n🔎 Ingresa un número a buscar: ");
+            System.out.print("\n ingresa un número a buscar: ");
             int numeroBuscado = sc.nextInt();
+
+            int resultado = busquedaBinaria(numeros, numeroBuscado);
+
+            if (resultado != -1) {
+                System.out.println("el número " + numeroBuscado + " se encuentra en la posición (índice): " + resultado);
+            } else {
+                System.out.println("el número " + numeroBuscado + " no está en la lista.");
+            }
+
+            sc.close();
+        } else {
+            System.out.println("No se pudo leer el archivo.");
+        }
     }
 }
