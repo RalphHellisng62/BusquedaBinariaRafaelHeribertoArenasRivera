@@ -72,4 +72,25 @@ public class BusquedaBinariaArchivo {
             System.out.println("Error al leer el archivo: " + e.getMessage());
             return null;
         }
-}
+    }
+
+    // construccion del método búsqueda binaria
+    public static int busquedaBinaria(int[] arr, int dato) {
+        int inicio = 0;
+        int fin = arr.length - 1;
+
+        while (inicio <= fin) {
+            int mitad = inicio + (fin - inicio) / 2;  // Evita overflow
+
+            if (arr[mitad] == dato) {
+                return mitad;
+            } else if (arr[mitad] < dato) {
+                inicio = mitad + 1;
+            } else {
+                fin = mitad - 1;
+            }
+        }
+        return -1; // No encontrado
+    }
+
+
