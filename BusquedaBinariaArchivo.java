@@ -112,3 +112,4 @@ public class BusquedaBinariaArchivo {
             System.out.println("error al escribir el archivo: " + e.getMessage());
         }
     }
+}
