@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -8,8 +10,8 @@ public class BusquedaBinariaArchivo {
     // Iniciamos con la construcción de un main
 
     public static void main(String[] args) {
-        String archivoEntrada = "numeros.txt";
-        String archivoSalida = "numeros_ordenados.txt";
+        String archivoEntrada = "numerosBusquedaBinaria.txt";
+        String archivoSalida = "numerosBusquedaBinaria_ordenados.txt";
 
         int[] numeros = leerArchivo(archivoEntrada);
 
@@ -80,7 +82,7 @@ public class BusquedaBinariaArchivo {
         int fin = arr.length - 1;
 
         while (inicio <= fin) {
-            int mitad = inicio + (fin - inicio) / 2;  // Evita overflow
+            int mitad = inicio + (fin - inicio) / 2;  
 
             if (arr[mitad] == dato) {
                 return mitad;
@@ -90,7 +92,23 @@ public class BusquedaBinariaArchivo {
                 fin = mitad - 1;
             }
         }
-        return -1; // No encontrado
+        return -1; 
     }
-
-
+    // imprime el arreglo
+    public static void imprimirArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+    // Y finalmente guarda los números ordenados en nuevo archivo
+    public static void escribirArchivo(int[] arr, String nombreArchivo) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo))) {
+            for (int num : arr) {
+                bw.write(num + "");
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("error al escribir el archivo: " + e.getMessage());
+        }
+    }
